@@ -3,168 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hajar Mennani — Data Portfolio</title>
+  <title>Hajar Mennani — Portfolio Data</title>
 
   <style>
     :root{
       --bg0:#070712;
       --bg1:#0B0A1A;
       --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(255,255,255,0.04);
       --border: rgba(255,255,255,0.10);
-      --text:#EAEAF2;
+      --text:#F3F4FF;
       --muted:#B8B8CC;
 
       --violet:#7C3AED;
       --violet2:#A78BFA;
-      --blue:#1E3A8A;
 
-      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --shadow: 0 18px 45px rgba(0,0,0,0.45);
       --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 500px at 20% 10%, rgba(124,58,237,0.28), transparent 55%),
-        radial-gradient(700px 450px at 70% 15%, rgba(167,139,250,0.18), transparent 55%),
+        radial-gradient(850px 520px at 18% 12%, rgba(124,58,237,0.28), transparent 55%),
+        radial-gradient(700px 450px at 78% 18%, rgba(167,139,250,0.18), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
     }
 
-    /* Layout */
-    .app{
-      min-height:100vh;
-      display:grid;
-      grid-template-columns: 260px 1fr;
-      gap: 18px;
-      padding: 18px;
+    .wrap{
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 42px 18px 70px;
     }
 
-    .sidebar{
-      background: rgba(0,0,0,0.35);
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+      padding: 14px 16px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: sticky;
-      top: 18px;
-      height: calc(100vh - 36px);
-      overflow:auto;
+      background: rgba(0,0,0,0.30);
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      padding: 8px 8px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 14px;
+      gap: 10px;
+      min-width: 220px;
     }
 
-    .logo{
-      width: 34px; height: 34px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--violet), var(--violet2));
-      box-shadow: 0 10px 25px rgba(124,58,237,0.35);
+    .dot{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--violet2), var(--violet));
+      box-shadow: 0 12px 30px rgba(124,58,237,0.25);
     }
 
-    .brand h3{
-      margin:0;
-      font-size: 15px;
+    .brand strong{
+      display:block;
+      font-size: 14px;
       letter-spacing: .2px;
     }
-    .brand small{
+    .brand span{
       display:block;
-      margin-top:2px;
-      color: var(--muted);
       font-size: 12px;
+      color: var(--muted);
+      margin-top:2px;
     }
 
-    .nav{
+    nav{
       display:flex;
-      flex-direction:column;
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
     }
 
-    .nav a{
+    nav a{
       text-decoration:none;
       color: var(--text);
-      padding: 10px 12px;
+      font-weight: 650;
+      font-size: 13px;
+      padding: 8px 10px;
       border-radius: 12px;
-      border: 1px solid transparent;
-      background: transparent;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      transition: .15s ease;
-      font-weight: 600;
-      font-size: 13.5px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    nav a:hover{
+      border-color: rgba(167,139,250,0.28);
     }
 
-    .nav a:hover{
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.10);
-    }
-
-    .nav a.active{
-      background: linear-gradient(90deg, rgba(124,58,237,0.35), rgba(124,58,237,0.10));
-      border-color: rgba(124,58,237,0.35);
-      box-shadow: 0 14px 30px rgba(124,58,237,0.12);
-    }
-
-    .pill{
-      font-size: 11px;
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .sidebar .footer{
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* Main */
-    .main{
-      border-radius: var(--radius);
-      overflow:hidden;
-    }
-
-    .topbar{
-      background: rgba(0,0,0,0.30);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 16px;
-      backdrop-filter: blur(10px);
-    }
-
-    .topbar h1{
-      margin:0;
-      font-size: 28px;
-      letter-spacing: .2px;
-    }
-
-    .topbar .subtitle{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-
-    .content{
+    /* Hero */
+    .hero{
       margin-top: 18px;
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
@@ -172,365 +109,24 @@
       align-items:start;
     }
 
-    .panel{
-      background: var(--panel);
+    .card{
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
+      background: var(--panel);
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
     }
 
-    .kpis{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 18px;
+    .hero-left{
+      padding: 22px;
     }
 
-    .kpi{
-      background: var(--panel2);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .kpi .label{
-      color: var(--muted);
-      font-size: 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom: 10px;
-    }
-
-    .kpi .value{
-      font-size: 20px;
-      font-weight: 800;
+    h1{
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 44px);
       letter-spacing: .2px;
+      line-height: 1.1;
     }
 
-    .kpi .delta{
-      margin-top: 8px;
-      font-size: 12px;
-      color: #7CFFB2;
-    }
-
-    .kpi .delta.down{ color:#FF7C7C; }
-
-    .section-title{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .section-title h2{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-
-    .badge{
-      font-size: 12px;
-      color: var(--violet2);
-      border: 1px solid rgba(167,139,250,0.28);
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(124,58,237,0.10);
-    }
-
-    .about p{
-      margin:0 0 12px;
-      line-height: 1.75;
-      color: #D3D3E6;
-      font-size: 14.5px;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .project{
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .project .head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .project h3{
-      margin:0;
-      font-size: 14.5px;
-    }
-
-    .project p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .tags{
-      margin-top: 10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-    }
-
-    .tag{
-      font-size: 11.5px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.22);
-      color: #EDE9FE;
-    }
-
-    /* Profile */
-    .profile{
-      text-align:center;
-    }
-
-    .avatar{
-      width: 220px;
-      height: 220px;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 18px 55px rgba(124,58,237,0.18);
-      background: rgba(255,255,255,0.06);
-    }
-
-    .name{
-      margin: 14px 0 4px;
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: .2px;
-    }
-
-    .role{
-      margin:0 0 14px;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-      justify-content:center;
-      margin: 14px 0 14px;
-    }
-
-    .chip{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: #EAEAF2;
-    }
-
-    .btns{
-      display:grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn{
-      text-decoration:none;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-weight: 800;
-      text-align:center;
-      transition: .15s ease;
-      border: 1px solid transparent;
-    }
-
-    .btn-primary{
-      color: #0B0A1A;
-      background: linear-gradient(90deg, var(--violet2), var(--violet));
-      box-shadow: 0 16px 40px rgba(124,58,237,0.22);
-    }
-
-    .btn-ghost{
-      color: var(--text);
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.12);
-    }
-
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(167,139,250,0.30);
-    }
-
-    .mini{
-      margin-top: 12px;
-      font-size: 12px;
-      color: #9CA3AF;
-      line-height: 1.5;
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .app{ grid-template-columns: 1fr; }
-      .sidebar{ position: static; height:auto; }
-      .content{ grid-template-columns: 1fr; }
-      .kpis{ grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="app">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="logo"></div>
-        <div>
-          <h3>Hajar Mennani</h3>
-          <small>Data • BI • Project</small>
-        </div>
-      </div>
-
-      <nav class="nav">
-        <a class="active" href="#dashboard">Dashboard <span class="pill">Home</span></a>
-        <a href="#projets">Projects <span class="pill">3</span></a>
-        <a href="#skills">Skills <span class="pill">SQL</span></a>
-        <a href="#contact">Contact <span class="pill">DM</span></a>
-      </nav>
-
-      <div class="footer">
-        Thème dark dashboard (violet néon).<br/>
-        Mets ta photo dans <b>images/photo.jpg</b> (ou change le nom dans le code).
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <header id="dashboard" class="topbar">
-        <h1>Dashboard — Portfolio</h1>
-        <div class="subtitle">Analyse de données • Visualisation • Tableaux de bord (Power BI, SQL, Looker Studio, Tableau)</div>
-      </header>
-
-      <section class="content">
-        <!-- LEFT -->
-        <div>
-          <section class="panel">
-            <div class="kpis">
-              <div class="kpi">
-                <div class="label">Projets publiés <span class="pill">2026</span></div>
-                <div class="value">3</div>
-                <div class="delta">+1 ce mois</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Dashboards <span class="pill">BI</span></div>
-                <div class="value">5</div>
-                <div class="delta">+2 récents</div>
-              </div>
-              <div class="kpi">
-                <div class="label">Stack <span class="pill">Core</span></div>
-                <div class="value">SQL</div>
-                <div class="delta down">+ Python bientôt</div>
-              </div>
-            </div>
-
-            <div class="section-title">
-              <h2>À propos</h2>
-              <span class="badge">Story • Impact • Data</span>
-            </div>
-
-            <div class="about">
-              <p>En tant qu’étudiant passionné par le monde de la data, j’ai créé ce portfolio pour rassembler et présenter les différents projets que j’ai réalisés au cours de mon parcours académique et professionnel. Ces projets illustrent mon engagement, ma curiosité et ma volonté constante d’apprendre et d’explorer de nouveaux domaines.</p>
-              <p>Mon intérêt s’est progressivement orienté vers la data : de la collecte à la visualisation, en passant par l’analyse et la valorisation des données pour aider à la prise de décision. Cette passion m’a conduit à développer des compétences solides en gestion de projet data, en analyse de données, et en création de tableaux de bord interactifs.</p>
-              <p>Parallèlement, mes expériences m’ont permis d’acquérir une compréhension globale de l’écosystème digital, en touchant également à des domaines tels que le marketing digital, le développement web et la communication, renforçant ainsi ma polyvalence et ma vision transversale des enjeux liés à la donnée.</p>
-              <p>Aujourd’hui, j’occupe le poste de chef de projet data, où je mets à profit mes compétences techniques et organisationnelles pour piloter des projets data-driven et accompagner les entreprises dans leur transformation numérique. Toujours animé par l’envie d’apprendre et de partager, je reste ouvert à toute opportunité d’échange ou de collaboration autour de la data et de l’innovation digitale.</p>
-            </div>
-          </section>
-
-          <section id="projets" class="panel" style="margin-top:18px;">
-            <div class="section-title">
-              <h2>Projets & Dashboards</h2>
-              <span class="badge">Data Viz</span>
-            </div>
-
-            <div class="cards">
-              <div class="project">
-                <div class="head">
-                  <h3>Dashboard Ventes (Power BI)</h3>
-                  <span class="pill">Interactive</span>
-                </div>
-                <p>KPI, évolution du CA, top produits & segments, filtres dynamiques. (Ajoute ici le lien Power BI public)</p>
-                <div class="tags">
-                  <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">KPI</span>
-                </div>
-              </div>
-
-              <div class="project">
-                <div class="head">
-                  <h3>Rapport Marketing (Looker Studio)</h3>
-                  <span class="pill">Report</span>
-                </div>
-                <p>Suivi campagnes, ROI, conversion, dashboards partagés. (Ajoute ici le lien Looker Studio)</p>
-                <div class="tags">
-                  <span class="tag">Looker</span><span class="tag">GA4</span><span class="tag">Data Viz</span>
-                </div>
-              </div>
-
-              <div class="project">
-                <div class="head">
-                  <h3>Analyse SQL — KPI & Cohortes</h3>
-                  <span class="pill">SQL</span>
-                </div>
-                <p>Requêtes SQL + visualisations (captures). (Ajoute ici le lien GitHub du projet)</p>
-                <div class="tags">
-                  <span class="tag">SQL</span><span class="tag">Analytics</span><span class="tag">Storytelling</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- RIGHT -->
-        <aside class="panel profile">
-          <!-- Mets ta photo dans images/photo.jpg (ou change le nom ci-dessous) -->
-          <img class="avatar" src="images/photo.jpg" alt="Photo de Hajar" />
-          <div class="name">Hajar Mennani</div>
-          <div class="role">Data Project Manager • BI & Analytics</div>
-
-          <div id="skills" class="chips">
-            <span class="chip">SQL</span>
-            <span class="chip">Power BI</span>
-            <span class="chip">Looker Studio</span>
-            <span class="chip">Tableau</span>
-          </div>
-
-          <div class="btns">
-            <!-- Remplace les # par tes liens -->
-            <a class="btn btn-primary" href="#" target="_blank" rel="noreferrer">Voir mon CV</a>
-            <a class="btn btn-ghost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="btn btn-ghost" href="#" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-
-          <div id="contact" class="mini">
-            Contact : <b>tonemail@gmail.com</b><br/>
-            Disponible pour collaboration / opportunités data.
-          </div>
-        </aside>
-      </section>
-    </main>
-  </div>
-</body>
-</html>
+    .line{
+      width: 120px;
