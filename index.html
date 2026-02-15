@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hajar Mennani — Portfolio Data</title>
-  <meta name="description" content="Portfolio Data Analyst junior spécialisée en marketing digital : analyse, dashboards, dataviz (Power BI, SQL, Looker Studio, Tableau)." />
+  <meta name="description" content="Portfolio Data Analyst orientée marketing digital : analyse, dashboards, dataviz (Power BI, SQL, Looker Studio, Tableau)." />
 
   <style>
     :root{
@@ -117,6 +117,7 @@
       border: 1px solid transparent;
       display: inline-block;
       transition: transform .12s ease;
+      cursor: pointer;
     }
     .btn:hover{ transform: translateY(-1px); }
     .btnPrimary{
@@ -136,13 +137,18 @@
       overflow: hidden;
       display:flex;
     }
-
     .heroPhoto{
       width:100%;
       height:100%;
       object-fit: cover;
       display:block;
       border-radius: var(--radius);
+    }
+
+    /* Lire plus */
+    .moreText{
+      display:none;
+      margin-top:10px;
     }
 
     /* SECTIONS */
@@ -211,7 +217,7 @@
         <div class="logo"></div>
         <div>
           <b>Hajar Mennani</b>
-          <small>Data Analyst junior • Data Marketing</small>
+          <small>Data Analyst • Data Marketing</small>
         </div>
       </div>
       <div class="links">
@@ -227,25 +233,57 @@
       <div class="glass heroL">
         <div class="kicker">Data Marketing • KPI • Insights</div>
         <h1>Bienvenue sur mon Portfolio</h1>
-        <div class="role">Data Analyst junior spécialisée en marketing digital</div>
+        <div class="role">Data Analyst orientée marketing digital</div>
         <div class="line"></div>
 
+        <!-- Intro courte -->
         <p>
-          Fraîchement diplômée d’un <strong>Master Data Marketing</strong> en alternance, je suis <strong>Data Analyst junior</strong>
-          spécialisée en marketing digital. À travers mes projets, j’analyse et valorise la donnée — de la collecte à la visualisation —
-          afin de transformer les KPIs en insights actionnables et soutenir la prise de décision business.
+          Je m’appelle <strong>Hajar Mennani</strong> et je transforme la donnée en décisions éclairées pour améliorer
+          la performance digitale. Profil hybride à la croisée de la <strong>data</strong>, du <strong>marketing</strong> et du <strong>web</strong>.
         </p>
 
-        <p>
-          Lors de mon alternance, j’ai travaillé sur l’analyse des performances marketing, la création de dashboards interactifs et
-          l’optimisation des stratégies d’acquisition dans une approche data-driven. Curieuse et rigoureuse, je souhaite aujourd’hui
-          évoluer dans un environnement innovant où je peux continuer à exploiter la data pour améliorer la performance digitale.
-        </p>
+        <!-- Texte complet (caché) -->
+        <div id="moreText" class="moreText">
+          <p>
+            Je m’appelle Hajar Mennani, et mon parcours est guidé par une conviction forte : transformer la donnée en décisions
+            éclairées et faire du digital un véritable levier de performance. Titulaire d’un Master en Marketing Digital, puis
+            d’un second Master en Data Marketing, j’ai progressivement construit un profil hybride à la croisée de la data,
+            du marketing et du web.
+          </p>
+
+          <p>
+            Au fil de mon parcours professionnel et personnel, j’ai conçu et développé plusieurs sites sous WordPress
+            (Divi, Elementor), en optimisant leur visibilité grâce au SEO/SEA, à l’analyse des performances et à
+            l’amélioration de l’expérience utilisateur. Mais je souhaitais aller plus loin : comprendre non seulement
+            le “quoi”, mais surtout le “pourquoi” derrière les chiffres. Cette volonté d’analyse approfondie m’a naturellement
+            orientée vers le métier de Data Analyst.
+          </p>
+
+          <p>
+            J’ai ainsi renforcé mes compétences en analyse de données, en datavisualisation et en modélisation, en travaillant
+            sur des projets utilisant des outils tels que Power BI, Tableau, Looker Studio et SQL. En tant que Data Analyst
+            orientée marketing digital, j’ai travaillé sur l’ensemble du cycle de la donnée, de la collecte à la visualisation,
+            en contribuant au suivi des KPIs, à la création de dashboards interactifs et à l’analyse des performances marketing
+            dans une logique data-driven.
+          </p>
+
+          <p>
+            Aujourd’hui, je souhaite évoluer en tant que Data Analyst, en mettant à profit ma double compétence data & marketing,
+            ma rigueur analytique et ma curiosité pour aider les organisations à mieux comprendre leurs données et à prendre des
+            décisions stratégiques basées sur des insights concrets.
+          </p>
+        </div>
 
         <div class="cta">
+          <!-- Bouton Lire plus -->
+          <button class="btn btnGhost" onclick="toggleText()" id="btnMore">Lire plus</button>
+
           <!-- Mets ton PDF ici : assets/CV_Hajar_Mennani.pdf (ou change le lien) -->
           <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noreferrer">Voir mon CV</a>
+
+          <!-- Remplace par ton vrai lien -->
           <a class="btn btnGhost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+
           <a class="btn btnGhost" href="#projets">Mes projets</a>
         </div>
       </div>
@@ -257,21 +295,6 @@
       </aside>
     </section>
 
-    <!-- PROFIL (section) -->
-    <section class="glass section">
-      <h2>Mon profil</h2>
-      <p class="sub">
-        Fraîchement diplômée d’un Master Data Marketing en alternance, je suis Data Analyst junior spécialisée en marketing digital.
-        À travers mes projets, j’analyse et valorise la donnée — de la collecte à la visualisation — afin de transformer les KPIs en
-        insights actionnables et soutenir la prise de décision business.
-      </p>
-      <p class="sub" style="margin-bottom:0;">
-        Lors de mon alternance, j’ai travaillé sur l’analyse des performances marketing, la création de dashboards interactifs et
-        l’optimisation des stratégies d’acquisition dans une approche data-driven. Curieuse et rigoureuse, je souhaite aujourd’hui
-        évoluer dans un environnement innovant où je peux continuer à exploiter la data pour améliorer la performance digitale.
-      </p>
-    </section>
-
     <!-- PROJETS -->
     <section id="projets" class="glass section">
       <h2>Projets (Data Viz & Dashboards)</h2>
@@ -279,18 +302,18 @@
 
       <div class="cards">
         <div class="cardItem">
-          <b>Dashboard Ventes — Power BI</b>
-          <p>KPI, CA, top produits, filtres dynamiques.</p>
+          <b>Dashboard Marketing — Power BI</b>
+          <p>KPI, acquisition, conversions, filtres dynamiques.</p>
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
         <div class="cardItem">
-          <b>Dashboard Marketing — Looker Studio</b>
-          <p>ROI, conversions, suivi campagnes, insights.</p>
+          <b>Rapport Performance — Looker Studio</b>
+          <p>ROI, suivi campagnes, insights actionnables.</p>
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
         <div class="cardItem">
-          <b>Analyse Acquisition — KPI & Cohortes</b>
-          <p>Analyse SQL / Excel + recommandations actionnables.</p>
+          <b>Analyse SQL — KPI & Cohortes</b>
+          <p>Extraction, segmentation, recommandations business.</p>
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
       </div>
@@ -311,8 +334,8 @@
           <p>SQL, Excel, segmentation, cohortes, performance marketing.</p>
         </div>
         <div class="skill">
-          <b>Marketing Digital</b>
-          <p>Acquisition, suivi campagnes, ROI, conversion, optimisation.</p>
+          <b>Web & Growth</b>
+          <p>WordPress (Divi/Elementor), SEO/SEA, UX, optimisation.</p>
         </div>
       </div>
     </section>
@@ -328,5 +351,15 @@
     <footer>© <script>document.write(new Date().getFullYear())</script> — Hajar Mennani</footer>
 
   </div>
+
+  <script>
+    function toggleText(){
+      const text = document.getElementById("moreText");
+      const btn  = document.getElementById("btnMore");
+      const opened = text.style.display === "block";
+      text.style.display = opened ? "none" : "block";
+      btn.textContent = opened ? "Lire plus" : "Lire moins";
+    }
+  </script>
 </body>
 </html>
