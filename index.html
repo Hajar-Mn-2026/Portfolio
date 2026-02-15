@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hajar Mennani — Portfolio Data Analyst</title>
-  <meta name="description" content="Portfolio Data : analyse, dashboards et visualisations (Power BI, SQL, Looker Studio, Tableau)." />
+  <title>Hajar Mennani — Portfolio Data</title>
+  <meta name="description" content="Portfolio Data Analyst junior spécialisée en marketing digital : analyse, dashboards, dataviz (Power BI, SQL, Looker Studio, Tableau)." />
 
   <style>
     :root{
       --bg0:#070712;
       --bg1:#0B0A1A;
-      --card: rgba(255,255,255,0.06);
       --border: rgba(255,255,255,0.10);
       --text:#F4F5FF;
       --muted:#B9B9CC;
+
       --violet:#7C3AED;
       --violet2:#A78BFA;
+
       --radius: 18px;
       --shadow: 0 18px 55px rgba(0,0,0,0.45);
       --max: 1050px;
@@ -102,9 +103,10 @@
     .heroL p{
       margin: 0 0 12px;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.85;
       font-size: 15px;
     }
+
     .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
     .btn{
       text-decoration:none;
@@ -128,32 +130,26 @@
       border-color: rgba(255,255,255,0.12);
     }
 
-    .heroR{ padding: 18px; display:flex; flex-direction:column; justify-content:center; gap:12px; }
-    .profileTop{ display:flex; align-items:center; gap:12px; }
-    .avatar{
-      width: 72px; height: 72px;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
+    /* RIGHT PHOTO ONLY */
+    .heroR{
+      padding: 0;
+      overflow: hidden;
+      display:flex;
     }
-    .name{ margin:0; font-size: 16px; font-weight: 950; }
-    .mini{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
 
-    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
-    .chip{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
+    .heroPhoto{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      border-radius: var(--radius);
     }
 
     /* SECTIONS */
     section{ margin-top: 18px; }
     .section{ padding: 22px; }
     .section h2{ margin:0 0 10px; font-size: 18px; letter-spacing:.2px; }
-    .sub{ margin:0 0 14px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .sub{ margin:0 0 14px; color: var(--muted); line-height: 1.75; font-size: 14.5px; }
 
     /* Projects */
     .cards{
@@ -188,7 +184,6 @@
     .skill b{ display:block; margin-bottom: 6px; }
     .skill p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-    /* Footer */
     footer{
       margin-top: 18px;
       color: #9CA3AF;
@@ -196,13 +191,13 @@
       text-align:center;
     }
 
-    /* Responsive */
     @media (max-width: 980px){
       .hero{ grid-template-columns: 1fr; }
       .cards{ grid-template-columns: 1fr; }
       .skills{ grid-template-columns: 1fr; }
       .links{ justify-content:flex-start; }
       .nav{ position: static; }
+      .heroR{ min-height: 280px; }
     }
   </style>
 </head>
@@ -216,11 +211,11 @@
         <div class="logo"></div>
         <div>
           <b>Hajar Mennani</b>
-          <small>Data Analyst / Chef de projet data</small>
+          <small>Data Analyst junior • Data Marketing</small>
         </div>
       </div>
       <div class="links">
-        <a href="#parcours">Parcours</a>
+        <a href="#profil">Profil</a>
         <a href="#projets">Projets</a>
         <a href="#competences">Compétences</a>
         <a href="#contact">Contact</a>
@@ -228,72 +223,59 @@
     </div>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="profil">
       <div class="glass heroL">
-        <div class="kicker">Analyse • Dataviz • Dashboards</div>
+        <div class="kicker">Data Marketing • KPI • Insights</div>
         <h1>Bienvenue sur mon Portfolio</h1>
-        <div class="role">Je transforme les données en décisions actionnables.</div>
+        <div class="role">Data Analyst junior spécialisée en marketing digital</div>
         <div class="line"></div>
 
         <p>
-          En tant qu’étudiant passionné par le monde de la data, j’ai créé ce portfolio pour rassembler et présenter
-          les différents projets que j’ai réalisés au cours de mon parcours académique et professionnel.
+          Fraîchement diplômée d’un <strong>Master Data Marketing</strong> en alternance, je suis <strong>Data Analyst junior</strong>
+          spécialisée en marketing digital. À travers mes projets, j’analyse et valorise la donnée — de la collecte à la visualisation —
+          afin de transformer les KPIs en insights actionnables et soutenir la prise de décision business.
+        </p>
+
+        <p>
+          Lors de mon alternance, j’ai travaillé sur l’analyse des performances marketing, la création de dashboards interactifs et
+          l’optimisation des stratégies d’acquisition dans une approche data-driven. Curieuse et rigoureuse, je souhaite aujourd’hui
+          évoluer dans un environnement innovant où je peux continuer à exploiter la data pour améliorer la performance digitale.
         </p>
 
         <div class="cta">
-          <!-- Remplace les liens -->
+          <!-- Mets ton PDF ici : assets/CV_Hajar_Mennani.pdf (ou change le lien) -->
           <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noreferrer">Voir mon CV</a>
           <a class="btn btnGhost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
           <a class="btn btnGhost" href="#projets">Mes projets</a>
         </div>
       </div>
 
+      <!-- RIGHT = PHOTO ONLY -->
       <aside class="glass heroR">
-        <div class="profileTop">
-          <!-- Si tu n'as pas de photo, laisse comme ça : ça n'affiche pas blanc -->
-          <img class="avatar" src="images/photo.jpg" alt="Photo de Hajar" onerror="this.style.display='none'">
-          <div>
-            <p class="name">Hajar Mennani</p>
-            <p class="mini">Data • BI • Visualisation</p>
-          </div>
-        </div>
-
-        <div class="chips">
-          <span class="chip">SQL</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">Looker Studio</span>
-          <span class="chip">Tableau</span>
-        </div>
-
-        <p class="mini" style="margin:0;">
-          Disponible pour collaboration / opportunités Data & BI.
-        </p>
+        <!-- IMPORTANT : mets ta photo dans images/photo.jpg (ou change le nom ici) -->
+        <img class="heroPhoto" src="images/photo.jpg" alt="Photo de Hajar" onerror="this.style.display='none'">
       </aside>
     </section>
 
-    <!-- PARCOURS -->
-    <section id="parcours" class="glass section">
-      <h2>Mon parcours</h2>
+    <!-- PROFIL (section) -->
+    <section class="glass section">
+      <h2>Mon profil</h2>
       <p class="sub">
-        En tant qu’étudiant passionné par le monde de la data, j’ai créé ce portfolio pour rassembler et présenter les
-        différents projets que j’ai réalisés au cours de mon parcours académique et professionnel. Ces projets illustrent
-        mon engagement, ma curiosité et ma volonté constante d’apprendre et d’explorer de nouveaux domaines.
-      </p>
-      <p class="sub">
-        Mon intérêt s’est progressivement orienté vers la data : de la collecte à la visualisation, en passant par l’analyse
-        et la valorisation des données pour aider à la prise de décision. Cette passion m’a conduit à développer des compétences
-        solides en gestion de projet data, en analyse de données, et en création de tableaux de bord interactifs.
+        Fraîchement diplômée d’un Master Data Marketing en alternance, je suis Data Analyst junior spécialisée en marketing digital.
+        À travers mes projets, j’analyse et valorise la donnée — de la collecte à la visualisation — afin de transformer les KPIs en
+        insights actionnables et soutenir la prise de décision business.
       </p>
       <p class="sub" style="margin-bottom:0;">
-        Aujourd’hui, j’occupe le poste de chef de projet data, où je mets à profit mes compétences techniques et organisationnelles
-        pour piloter des projets data-driven et accompagner les entreprises dans leur transformation numérique.
+        Lors de mon alternance, j’ai travaillé sur l’analyse des performances marketing, la création de dashboards interactifs et
+        l’optimisation des stratégies d’acquisition dans une approche data-driven. Curieuse et rigoureuse, je souhaite aujourd’hui
+        évoluer dans un environnement innovant où je peux continuer à exploiter la data pour améliorer la performance digitale.
       </p>
     </section>
 
     <!-- PROJETS -->
     <section id="projets" class="glass section">
       <h2>Projets (Data Viz & Dashboards)</h2>
-      <p class="sub">Ajoute ici tes liens publics Power BI / Looker / Tableau + captures si tu veux.</p>
+      <p class="sub">Remplace les liens “#” par tes liens publics (Power BI / Looker / Tableau) + ajoute des captures si tu veux.</p>
 
       <div class="cards">
         <div class="cardItem">
@@ -302,13 +284,13 @@
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
         <div class="cardItem">
-          <b>Rapport Marketing — Looker Studio</b>
-          <p>ROI, conversion, suivi campagnes, insights.</p>
+          <b>Dashboard Marketing — Looker Studio</b>
+          <p>ROI, conversions, suivi campagnes, insights.</p>
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
         <div class="cardItem">
-          <b>Analyse SQL — KPI & Cohortes</b>
-          <p>Requêtes SQL + visuels / captures.</p>
+          <b>Analyse Acquisition — KPI & Cohortes</b>
+          <p>Analyse SQL / Excel + recommandations actionnables.</p>
           <a href="#" target="_blank" rel="noreferrer">Voir →</a>
         </div>
       </div>
@@ -317,20 +299,20 @@
     <!-- COMPETENCES -->
     <section id="competences" class="glass section">
       <h2>Compétences</h2>
-      <p class="sub">Un stack simple, orienté BI & décision.</p>
+      <p class="sub">Stack orienté marketing digital & performance.</p>
 
       <div class="skills">
         <div class="skill">
-          <b>Power BI</b>
-          <p>Dashboards KPI, Power Query, DAX, data modeling.</p>
+          <b>BI & Dashboards</b>
+          <p>Power BI, Looker Studio, KPI, dataviz, storytelling.</p>
         </div>
         <div class="skill">
-          <b>SQL</b>
-          <p>Jointures, agrégations, KPI, cohortes, extraction multi-sources.</p>
+          <b>Analyse</b>
+          <p>SQL, Excel, segmentation, cohortes, performance marketing.</p>
         </div>
         <div class="skill">
-          <b>Data Viz</b>
-          <p>Storytelling, design lisible, insights actionnables.</p>
+          <b>Marketing Digital</b>
+          <p>Acquisition, suivi campagnes, ROI, conversion, optimisation.</p>
         </div>
       </div>
     </section>
