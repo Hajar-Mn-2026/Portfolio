@@ -20,7 +20,8 @@
       --border: rgba(255,255,255,0.10);
       --radius: 18px;
       --shadow: 0 18px 55px rgba(0,0,0,0.45);
-      --max: 1120px;
+
+      --max: 1140px;
     }
 
     *{ box-sizing:border-box; }
@@ -30,128 +31,210 @@
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 520px at 18% 10%, rgba(124,58,237,.30), transparent 55%),
-        radial-gradient(800px 520px at 80% 18%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 520px at 16% 8%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(900px 520px at 82% 16%, rgba(167,139,250,.22), transparent 55%),
+        radial-gradient(900px 520px at 60% 90%, rgba(124,58,237,.18), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
 
     a{ color: inherit; text-decoration:none; }
-
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 70px; }
 
+    /* soft animated glow blobs */
+    .blob{
+      position: fixed;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      filter: blur(55px);
+      opacity: .20;
+      pointer-events:none;
+      z-index: -1;
+      animation: floaty 10s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 30%, var(--violet2), transparent 55%);
+    }
+    .blob.b2{
+      width: 620px; height: 620px;
+      right: -260px; top: 90px;
+      opacity: .16;
+      animation-duration: 12s;
+      background: radial-gradient(circle at 30% 30%, var(--violet), transparent 58%);
+    }
+    .blob.b1{
+      left: -240px; top: -120px;
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translate(0,0) scale(1); }
+      50%{ transform: translate(18px,22px) scale(1.04); }
+    }
+
+    /* glass */
     .glass{
       background: rgba(0,0,0,0.30);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+    }
+    .glass.soft{
+      background: rgba(255,255,255,0.03);
     }
 
     /* NAV */
     .nav{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       padding: 14px 16px;
-      position: sticky; top: 12px; z-index: 20;
+      position: sticky; top: 12px; z-index: 30;
     }
-    .brand{ display:flex; align-items:center; gap:10px; }
+    .nav::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: calc(var(--radius) + 1px);
+      padding:1px;
+      background: linear-gradient(90deg, rgba(167,139,250,.35), rgba(124,58,237,.25), rgba(167,139,250,.12));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .brand{ display:flex; align-items:center; gap:10px; position:relative; z-index:1; }
+    /* Logo image (remplace le carré) */
     .logo{
       width: 34px; height: 34px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--violet2), var(--violet));
-      box-shadow: 0 14px 40px rgba(124,58,237,.25);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 14px 40px rgba(124,58,237,.18);
+      background: rgba(255,255,255,0.04);
+      flex:0 0 auto;
     }
+    .logo img{
+      width:100%; height:100%;
+      display:block;
+      object-fit: cover;
+    }
+
     .brand b{ display:block; font-size: 14px; letter-spacing:.2px; }
     .brand small{ display:block; color: var(--muted); font-size: 12px; margin-top:2px; }
 
-    .links{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .links{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; position:relative; z-index:1; }
     .links a{
       padding: 8px 10px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
+      transition: transform .12s ease, border-color .12s ease;
     }
-    .links a:hover{ border-color: rgba(167,139,250,0.28); }
+    .links a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(167,139,250,0.28);
+    }
 
-    /* HERO */
+    /* HERO LAYOUT */
     .hero{
       margin-top: 18px;
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
-      align-items: start; /* photo ne bouge pas quand le texte s’ouvre */
+      align-items: start; /* keeps photo stable when text expands */
     }
 
     /* LEFT */
-    .heroL{ padding: 24px; }
+    .heroL{ padding: 26px; position:relative; overflow:hidden; }
+    .heroL::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(700px 320px at 20% 0%, rgba(167,139,250,0.10), transparent 60%),
+        radial-gradient(700px 320px at 80% 120%, rgba(124,58,237,0.10), transparent 60%);
+      pointer-events:none;
+    }
     .kicker{
       color: var(--violet2);
-      font-weight: 850;
-      letter-spacing:.4px;
-      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing:.5px;
+      font-size: 12px;
       text-transform: uppercase;
+      position:relative;
+      z-index:1;
     }
     h1{
       margin: 10px 0 8px;
-      font-size: clamp(30px, 4vw, 50px);
-      line-height: 1.05;
+      font-size: clamp(30px, 4.1vw, 52px);
+      line-height: 1.03;
+      position:relative;
+      z-index:1;
     }
-    .role{ margin: 0 0 10px; color: var(--muted); font-size: 14.5px; }
+    .role{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14.5px;
+      position:relative;
+      z-index:1;
+    }
     .line{
-      width: 140px; height: 5px; border-radius: 999px;
+      width: 150px; height: 5px; border-radius: 999px;
       background: linear-gradient(90deg, var(--violet2), var(--violet));
-      margin: 12px 0 16px;
+      margin: 12px 0 18px;
+      position:relative;
+      z-index:1;
     }
 
-    /* Buttons row */
+    /* CTA row */
     .ctaRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin: 0 0 16px;
+      position:relative;
+      z-index:1;
     }
     .btn{
       padding: 11px 14px;
       border-radius: 14px;
-      font-weight: 850;
+      font-weight: 900;
       font-size: 13.5px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
-      color: var(--text);              /* ✅ texte blanc */
+      color: var(--text); /* ✅ white text */
       cursor: pointer;
-      transition: transform .12s ease, border-color .12s ease;
+      transition: transform .12s ease, border-color .12s ease, filter .12s ease;
       user-select:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
     }
+    button.btn{ -webkit-appearance:none; appearance:none; font:inherit; }
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(167,139,250,0.30);
     }
+
+    /* Primary = gradient + WHITE text (as requested) */
     .btnPrimary{
-      color:#0B0A1A;                   /* texte sombre sur dégradé */
+      color:#FFFFFF; /* ✅ white */
       border-color: transparent;
-      background: linear-gradient(90deg, var(--violet2), var(--violet));
-      box-shadow: 0 16px 40px rgba(124,58,237,.20);
+      background: linear-gradient(90deg, rgba(167,139,250,0.95), rgba(124,58,237,0.95));
+      box-shadow: 0 18px 50px rgba(124,58,237,.25);
     }
+    .btnPrimary:hover{ filter: brightness(1.05); }
 
-    /* ✅ forcer le bouton (et tout bouton) à ne pas avoir de style navigateur */
-    button.btn{
-      -webkit-appearance: none;
-      appearance: none;
-      font: inherit;
-    }
-
+    /* special underline for Lire plus */
     #btnMore{ position: relative; }
     #btnMore::after{
       content:"";
       position:absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 7px;
-      height: 2px;
-      border-radius: 999px;
+      left: 14px; right: 14px; bottom: 7px;
+      height: 2px; border-radius: 999px;
       background: linear-gradient(90deg, var(--violet2), var(--violet));
       opacity: .35;
     }
@@ -159,11 +242,14 @@
     .heroL p{
       margin: 0 0 12px;
       color: var(--muted);
-      line-height: 1.85;
+      line-height: 1.9;
       font-size: 15px;
+      position:relative;
+      z-index:1;
     }
+    .heroL strong{ color: var(--text); }
 
-    /* Lire plus premium (smooth) */
+    /* Lire plus (smooth) */
     .moreText{
       max-height: 0;
       overflow: hidden;
@@ -172,6 +258,8 @@
       transition: max-height .45s ease, opacity .35s ease, transform .35s ease;
       will-change: max-height, opacity, transform;
       margin-top: 0;
+      position:relative;
+      z-index:1;
     }
     .moreText.open{
       opacity: 1;
@@ -179,41 +267,43 @@
       margin-top: 10px;
     }
 
-    /* RIGHT PHOTO — Premium + un peu plus grande + taille fixe */
+    /* RIGHT PHOTO — ULTRA PREMIUM (bigger, not changing size) */
     .heroR{
       padding: 0;
       overflow: hidden;
       position: relative;
       width: 100%;
-      max-width: 430px;     /* ✅ plus grande qu'avant */
-      height: 520px;        /* ✅ fixe, ne change pas avec Lire plus */
+      max-width: 460px;  /* ✅ slightly bigger */
+      height: 560px;     /* ✅ fixed height => never changes */
       justify-self: end;
       align-self: start;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow:
+        0 26px 90px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.06) inset;
     }
 
-    /* Glow violet premium derrière */
+    /* Glow behind */
     .heroR::before{
       content:"";
       position:absolute;
-      inset:-44px;
+      inset:-50px;
       background:
-        radial-gradient(420px 300px at 30% 20%, rgba(167,139,250,0.58), transparent 60%),
-        radial-gradient(460px 320px at 70% 75%, rgba(124,58,237,0.48), transparent 62%);
-      filter: blur(18px);
+        radial-gradient(520px 360px at 28% 18%, rgba(167,139,250,0.62), transparent 60%),
+        radial-gradient(560px 390px at 70% 78%, rgba(124,58,237,0.52), transparent 62%);
+      filter: blur(20px);
       opacity: .95;
       z-index:0;
     }
 
-    /* Glass overlay (effet haut de gamme) */
+    /* Premium glass overlay */
     .heroR::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(900px 500px at 30% 10%, rgba(255,255,255,0.08), transparent 55%),
-        linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.58));
+        radial-gradient(900px 500px at 30% 10%, rgba(255,255,255,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.62));
       z-index:2;
       pointer-events:none;
     }
@@ -221,36 +311,36 @@
     .heroPhoto{
       width:100%;
       height:100%;
+      /* ✅ Use cover for premium look; if you prefer full photo, change to contain */
       object-fit: cover;
+      object-position: center top; /* helps keep face visible */
       display:block;
       border-radius: var(--radius);
       position: relative;
       z-index: 1;
-      transform: scale(1.02);
+      transform: scale(1.03);
       transition: transform .35s ease, filter .35s ease;
-      filter: saturate(1.06) contrast(1.06);
+      filter: saturate(1.08) contrast(1.08);
     }
 
-    /* Cadre fin + ombre soft designer */
     .heroFrame{
       position:absolute;
       inset:0;
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
       box-shadow:
-        0 26px 90px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(124,58,237,0.14) inset;
+        0 0 0 1px rgba(124,58,237,0.14) inset,
+        0 0 80px rgba(124,58,237,0.12);
       z-index:3;
       pointer-events:none;
     }
 
-    /* Hover premium */
     .heroR:hover .heroPhoto{
-      transform: scale(1.06);
-      filter: saturate(1.14) contrast(1.10);
+      transform: scale(1.07);
+      filter: saturate(1.16) contrast(1.10);
     }
 
-    /* SECTIONS */
+    /* SECTION */
     section{ margin-top: 18px; }
     .section{ padding: 22px; }
     .section h2{ margin:0 0 10px; font-size: 18px; letter-spacing:.2px; }
@@ -268,10 +358,15 @@
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
+      transition: transform .14s ease, border-color .14s ease;
+    }
+    .cardItem:hover{
+      transform: translateY(-2px);
+      border-color: rgba(167,139,250,0.22);
     }
     .cardItem b{ display:block; margin-bottom: 6px; font-size: 14px; }
     .cardItem p{ margin:0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .cardItem a{ font-weight: 850; color: var(--violet2); }
+    .cardItem a{ font-weight: 900; color: var(--violet2); }
 
     /* Skills */
     .skills{
@@ -285,18 +380,23 @@
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
+      transition: transform .14s ease, border-color .14s ease;
+    }
+    .skill:hover{
+      transform: translateY(-2px);
+      border-color: rgba(167,139,250,0.22);
     }
     .skill b{ display:block; margin-bottom: 6px; }
     .skill p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-    /* Contact link style */
+    /* Contact link */
     .contactLine a{
       color: var(--violet2);
-      font-weight: 800;
+      font-weight: 900;
       border-bottom: 1px solid rgba(167,139,250,0.35);
     }
     .contactLine a:hover{
-      border-bottom-color: rgba(167,139,250,0.75);
+      border-bottom-color: rgba(167,139,250,0.80);
     }
 
     footer{
@@ -314,25 +414,42 @@
       .nav{ position: static; }
       .heroR{
         max-width: 100%;
-        height: 360px; /* fixe sur mobile */
+        height: 380px; /* fixed on mobile */
         justify-self: stretch;
       }
+    }
+
+    /* reduced motion friendly */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
 
 <body>
+  <!-- animated background blobs -->
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
   <div class="wrap">
 
     <!-- NAV -->
     <div class="glass nav">
       <div class="brand">
-        <div class="logo"></div>
+        <!-- ✅ Replace with a small image if you have one.
+             Put your file here: /Portfolio/images/logo.png
+             If you don't have it yet, keep it (it will just show broken image). -->
+        <div class="logo">
+          <img src="/Portfolio/images/logo.png" alt="Logo Hajar" onerror="this.style.display='none'">
+        </div>
+
         <div>
           <b>Hajar Mennani</b>
           <small>Data Analyst • Data Marketing</small>
         </div>
       </div>
+
       <div class="links">
         <a href="#profil">Profil</a>
         <a href="#projets">Projets</a>
@@ -350,15 +467,15 @@
         <div class="role">Data Analyst orientée marketing digital</div>
         <div class="line"></div>
 
-        <!-- Boutons au-dessus du texte -->
+        <!-- Buttons above text -->
         <div class="ctaRow">
           <button class="btn" id="btnMore" type="button">Lire plus</button>
-          <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf (2)" target="_blank" rel="noopener">Voir mon CV</a>
+          <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noopener">Voir mon CV</a>
           <a class="btn" href="https://www.linkedin.com/in/hajar-mennani-cdi-data-analyst-digital-paris/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="#projets">Mes projets</a>
         </div>
 
-        <!-- Texte visible -->
+        <!-- Visible text -->
         <p>
           Je m’appelle <strong>Hajar Mennani</strong> et je transforme la donnée en décisions éclairées pour améliorer
           la performance digitale. Profil hybride à la croisée de la <strong>data</strong>, du <strong>marketing</strong> et du <strong>web</strong>.
@@ -372,7 +489,7 @@
           orientée vers le métier de Data Analyst.
         </p>
 
-        <!-- Texte caché (Lire plus) -->
+        <!-- Hidden text (Lire plus) -->
         <div id="moreText" class="moreText">
           <p>
             Je m’appelle Hajar Mennani, et mon parcours est guidé par une conviction forte : transformer la donnée en décisions
@@ -397,15 +514,15 @@
         </div>
       </div>
 
-      <!-- RIGHT PHOTO (Premium) -->
+      <!-- RIGHT PHOTO -->
       <aside class="glass heroR">
-        <!-- ✅ Chemin absolu fiable GitHub Pages -->
+        <!-- ✅ Your working image path -->
         <img class="heroPhoto" src="/Portfolio/Image.jpeg" alt="Photo de Hajar">
         <div class="heroFrame"></div>
       </aside>
     </section>
 
-    <!-- PROJETS -->
+    <!-- PROJECTS -->
     <section id="projets" class="glass section">
       <h2>Projets (Data Viz & Dashboards)</h2>
       <p class="sub">Remplace les liens “#” par tes liens publics (Power BI / Looker / Tableau) + ajoute des captures si tu veux.</p>
@@ -429,23 +546,23 @@
       </div>
     </section>
 
-    <!-- COMPETENCES -->
+    <!-- SKILLS -->
     <section id="competences" class="glass section">
       <h2>Compétences</h2>
       <p class="sub">Stack orienté marketing digital & performance.</p>
 
       <div class="skills">
         <div class="skill">
-          <b>BI & Dashboards</b>
-          <p>Power BI, Looker Studio, KPI, dataviz, storytelling.</p>
+          <b>Data Analytics & Dashboards</b>
+          <p>Looker Studio, Power BI, Tableau, SQL, Google Analytics, Data cleaning & préparation, Gestion de bases de données, Power Query, Excel, CRM.</p>
         </div>
         <div class="skill">
-          <b>Analyse</b>
-          <p>SQL, Excel, segmentation, cohortes, performance marketing.</p>
+          <b>MEDIA DIGITAL & ACQUISITION</b>
+          <p>SEA, Facebook Ads, Référencement naturel (SEO), performance marketing.</p>
         </div>
         <div class="skill">
           <b>Web & Growth</b>
-          <p>WordPress (Divi/Elementor), SEO/SEA, UX, optimisation.</p>
+          <p>Développement de sites WordPress (Divi, Elementor), Gestion de CMS et création de boutiques e-commerce, Intégration web et optimisation UX/UI</p>
         </div>
       </div>
     </section>
@@ -466,7 +583,7 @@
   </div>
 
   <script>
-    // Lire plus premium (smooth, la photo reste fixe)
+    // Lire plus premium (photo stays fixed)
     const more = document.getElementById("moreText");
     const btn  = document.getElementById("btnMore");
 
@@ -485,6 +602,7 @@
     }
 
     closeMore();
+
     btn.addEventListener("click", () => {
       const opened = more.classList.contains("open");
       opened ? closeMore() : openMore();
