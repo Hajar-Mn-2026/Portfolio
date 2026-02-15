@@ -145,10 +145,36 @@
       border-radius: var(--radius);
     }
 
-    /* Lire plus */
+    /* Lire plus premium */
     .moreText{
-      display:none;
-      margin-top:10px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height .45s ease, opacity .35s ease, transform .35s ease;
+      will-change: max-height, opacity, transform;
+      margin-top: 0;
+    }
+    .moreText.open{
+      opacity: 1;
+      transform: translateY(0);
+      margin-top: 10px;
+    }
+
+    #btnMore{ position: relative; }
+    #btnMore::after{
+      content:"";
+      position:absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 7px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--violet2), var(--violet));
+      opacity: .35;
+    }
+    #btnMore:hover{
+      border-color: rgba(167,139,250,0.30);
     }
 
     /* SECTIONS */
@@ -236,50 +262,48 @@
         <div class="role">Data Analyst orientée marketing digital</div>
         <div class="line"></div>
 
-      <!-- Intro courte visible -->
-<p>
-  Je m’appelle <strong>Hajar Mennani</strong> et je transforme la donnée en décisions éclairées pour améliorer
-  la performance digitale. Profil hybride à la croisée de la <strong>data</strong>, du <strong>marketing</strong> et du <strong>web</strong>.
-</p>
+        <!-- Intro courte visible -->
+        <p>
+          Je m’appelle <strong>Hajar Mennani</strong> et je transforme la donnée en décisions éclairées pour améliorer
+          la performance digitale. Profil hybride à la croisée de la <strong>data</strong>, du <strong>marketing</strong> et du <strong>web</strong>.
+        </p>
 
-<p>
-  Au fil de mon parcours professionnel et personnel, j’ai conçu et développé plusieurs sites sous WordPress
-  (Divi, Elementor), en optimisant leur visibilité grâce au SEO/SEA, à l’analyse des performances et à
-  l’amélioration de l’expérience utilisateur. Mais je souhaitais aller plus loin : comprendre non seulement
-  le “quoi”, mais surtout le “pourquoi” derrière les chiffres. Cette volonté d’analyse approfondie m’a naturellement
-  orientée vers le métier de Data Analyst.
-</p>
+        <!-- Paragraphe visible avant Lire plus -->
+        <p>
+          Au fil de mon parcours professionnel et personnel, j’ai conçu et développé plusieurs sites sous WordPress
+          (Divi, Elementor), en optimisant leur visibilité grâce au SEO/SEA, à l’analyse des performances et à
+          l’amélioration de l’expérience utilisateur. Mais je souhaitais aller plus loin : comprendre non seulement
+          le “quoi”, mais surtout le “pourquoi” derrière les chiffres. Cette volonté d’analyse approfondie m’a naturellement
+          orientée vers le métier de Data Analyst.
+        </p>
 
-<!-- TEXTE COMPLET CACHE -->
-<div id="moreText" class="moreText">
-  <p>
-    Je m’appelle Hajar Mennani, et mon parcours est guidé par une conviction forte :
-    transformer la donnée en décisions éclairées et faire du digital un véritable levier de performance.
-    Titulaire d’un Master en Marketing Digital, puis d’un second Master en Data Marketing,
-    j’ai progressivement construit un profil hybride à la croisée de la data, du marketing et du web.
-  </p>
+        <!-- Texte complet (caché) -->
+        <div id="moreText" class="moreText">
+          <p>
+            Je m’appelle Hajar Mennani, et mon parcours est guidé par une conviction forte : transformer la donnée en décisions
+            éclairées et faire du digital un véritable levier de performance. Titulaire d’un Master en Marketing Digital, puis
+            d’un second Master en Data Marketing, j’ai progressivement construit un profil hybride à la croisée de la data,
+            du marketing et du web.
+          </p>
 
-  <p>
-    J’ai ainsi renforcé mes compétences en analyse de données, en datavisualisation et en modélisation,
-    en travaillant sur des projets utilisant des outils tels que Power BI, Tableau, Looker Studio et SQL.
-    En tant que Data Analyst orientée marketing digital, j’ai travaillé sur l’ensemble du cycle de la donnée,
-    de la collecte à la visualisation, en contribuant au suivi des KPIs, à la création de dashboards interactifs
-    et à l’analyse des performances marketing dans une logique data-driven.
-  </p>
+          <p>
+            J’ai ainsi renforcé mes compétences en analyse de données, en datavisualisation et en modélisation, en travaillant
+            sur des projets utilisant des outils tels que Power BI, Tableau, Looker Studio et SQL. En tant que Data Analyst
+            orientée marketing digital, j’ai travaillé sur l’ensemble du cycle de la donnée, de la collecte à la visualisation,
+            en contribuant au suivi des KPIs, à la création de dashboards interactifs et à l’analyse des performances marketing
+            dans une logique data-driven.
+          </p>
 
-  <p>
-    Aujourd’hui, je souhaite évoluer en tant que Data Analyst, en mettant à profit ma double compétence
-    data & marketing, ma rigueur analytique et ma curiosité pour aider les organisations à mieux comprendre
-    leurs données et à prendre des décisions stratégiques basées sur des insights concrets.
-  </p>
-</div>
-
+          <p>
+            Aujourd’hui, je souhaite évoluer en tant que Data Analyst, en mettant à profit ma double compétence data & marketing,
+            ma rigueur analytique et ma curiosité pour aider les organisations à mieux comprendre leurs données et à prendre des
+            décisions stratégiques basées sur des insights concrets.
           </p>
         </div>
 
         <div class="cta">
-          <!-- Bouton Lire plus -->
-          <button class="btn btnGhost" onclick="toggleText()" id="btnMore">Lire plus</button>
+          <!-- Lire plus premium -->
+          <button class="btn btnGhost" id="btnMore" type="button">Lire plus</button>
 
           <!-- Mets ton PDF ici : assets/CV_Hajar_Mennani.pdf (ou change le lien) -->
           <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noreferrer">Voir mon CV</a>
@@ -347,7 +371,7 @@
     <section id="contact" class="glass section">
       <h2>Contact</h2>
       <p class="sub" style="margin-bottom:0;">
-        Email : <b>hajarmn18@gmail.com</b> • LinkedIn : <b>(https://www.linkedin.com/in/hajar-mennani-cdi-data-analyst-digital-paris/)</b>
+        Email : <b>tonemail@gmail.com</b> • LinkedIn : <b>(ton lien)</b>
       </p>
     </section>
 
@@ -356,13 +380,41 @@
   </div>
 
   <script>
-    function toggleText(){
-      const text = document.getElementById("moreText");
-      const btn  = document.getElementById("btnMore");
-      const opened = text.style.display === "block";
-      text.style.display = opened ? "none" : "block";
-      btn.textContent = opened ? "Lire plus" : "Lire moins";
+    const more = document.getElementById("moreText");
+    const btn  = document.getElementById("btnMore");
+
+    function setClosed(){
+      more.classList.remove("open");
+      more.style.maxHeight = "0px";
+      btn.textContent = "Lire plus";
+      btn.setAttribute("aria-expanded", "false");
     }
+
+    function setOpen(){
+      more.classList.add("open");
+      more.style.maxHeight = more.scrollHeight + "px";
+      btn.textContent = "Lire moins";
+      btn.setAttribute("aria-expanded", "true");
+    }
+
+    // état initial
+    setClosed();
+
+    btn.addEventListener("click", () => {
+      const opened = more.classList.contains("open");
+      if(opened){
+        setClosed();
+      }else{
+        setOpen();
+      }
+    });
+
+    // si la fenêtre change de taille, on recalcule la hauteur
+    window.addEventListener("resize", () => {
+      if(more.classList.contains("open")){
+        more.style.maxHeight = more.scrollHeight + "px";
+      }
+    });
   </script>
 </body>
 </html>
