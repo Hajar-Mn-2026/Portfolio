@@ -78,7 +78,7 @@
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
-      align-items: stretch;
+      align-items: start; /* important: la photo ne change pas quand le texte s'ouvre */
     }
 
     /* LEFT */
@@ -96,49 +96,56 @@
       line-height: 1.05;
     }
     .role{ margin: 0 0 10px; color: var(--muted); font-size: 14.5px; }
-
     .line{
       width: 140px; height: 5px; border-radius: 999px;
       background: linear-gradient(90deg, var(--violet2), var(--violet));
       margin: 12px 0 16px;
     }
 
-    /* Buttons row (AU DESSUS DU TEXTE) */
+    /* Buttons row (au-dessus du texte) */
     .ctaRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin: 0 0 16px;
     }
-
     .btn{
       padding: 11px 14px;
       border-radius: 14px;
       font-weight: 850;
       font-size: 13.5px;
-      border: 1px solid transparent;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: transform .12s ease, border-color .12s ease;
+      user-select:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease;
-      user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); }
-
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(167,139,250,0.30);
+    }
     .btnPrimary{
       color:#0B0A1A;
+      border-color: transparent;
       background: linear-gradient(90deg, var(--violet2), var(--violet));
       box-shadow: 0 16px 40px rgba(124,58,237,.20);
     }
-    .btnGhost{
-      color: var(--text);
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.12);
+    #btnMore{ position: relative; }
+    #btnMore::after{
+      content:"";
+      position:absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 7px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--violet2), var(--violet));
+      opacity: .35;
     }
-    .btnGhost:hover{ border-color: rgba(167,139,250,0.30); }
 
-    /* Texte */
     .heroL p{
       margin: 0 0 12px;
       color: var(--muted);
@@ -162,35 +169,70 @@
       margin-top: 10px;
     }
 
-    /* RIGHT = PHOTO */
+    /* RIGHT PHOTO — taille fixe + glow premium */
     .heroR{
       padding: 0;
       overflow: hidden;
-      display:flex;
-      min-height: 520px; /* garde une belle hauteur */
+      position: relative;
+      width: 100%;
+      max-width: 380px;     /* réduit un peu la largeur */
+      height: 480px;        /* fixe la hauteur => ne bouge pas avec Lire plus */
+      justify-self: end;    /* pousse à droite */
+      align-self: start;    /* garde la même taille */
     }
+
+    /* Glow derrière */
+    .heroR::before{
+      content:"";
+      position:absolute;
+      inset:-38px;
+      background:
+        radial-gradient(380px 260px at 30% 20%, rgba(167,139,250,0.55), transparent 60%),
+        radial-gradient(420px 280px at 70% 70%, rgba(124,58,237,0.45), transparent 62%);
+      filter: blur(18px);
+      opacity: .95;
+      z-index:0;
+    }
+
+    /* Overlay glass sur la photo */
+    .heroR::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.55));
+      z-index:2;
+      pointer-events:none;
+    }
+
     .heroPhoto{
       width:100%;
       height:100%;
       object-fit: cover;
       display:block;
       border-radius: var(--radius);
+      position: relative;
+      z-index: 1;
+      transform: scale(1.02);
+      transition: transform .35s ease, filter .35s ease;
+      filter: saturate(1.05) contrast(1.05);
     }
-    /* si photo absente: joli placeholder au lieu d'un vide */
-    .photoFallback{
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: rgba(255,255,255,0.65);
-      background:
-        radial-gradient(500px 320px at 30% 20%, rgba(124,58,237,0.35), transparent 60%),
-        radial-gradient(500px 320px at 70% 70%, rgba(167,139,250,0.20), transparent 60%),
-        rgba(255,255,255,0.04);
+
+    /* Cadre fin + ombre soft designer */
+    .heroFrame{
+      position:absolute;
+      inset:0;
       border-radius: var(--radius);
-      font-weight: 800;
-      letter-spacing: .2px;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 20px 70px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(124,58,237,0.10) inset;
+      z-index:3;
+      pointer-events:none;
+    }
+
+    .heroR:hover .heroPhoto{
+      transform: scale(1.06);
+      filter: saturate(1.12) contrast(1.08);
     }
 
     /* SECTIONS */
@@ -232,6 +274,16 @@
     .skill b{ display:block; margin-bottom: 6px; }
     .skill p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
+    /* Contact link style */
+    .contactLine a{
+      color: var(--violet2);
+      font-weight: 800;
+      border-bottom: 1px solid rgba(167,139,250,0.35);
+    }
+    .contactLine a:hover{
+      border-bottom-color: rgba(167,139,250,0.75);
+    }
+
     footer{
       margin-top: 18px;
       color: #9CA3AF;
@@ -245,7 +297,11 @@
       .skills{ grid-template-columns: 1fr; }
       .links{ justify-content:flex-start; }
       .nav{ position: static; }
-      .heroR{ min-height: 320px; }
+      .heroR{
+        max-width: 100%;
+        height: 340px; /* fixe sur mobile */
+        justify-self: stretch;
+      }
     }
   </style>
 </head>
@@ -279,17 +335,12 @@
         <div class="role">Data Analyst orientée marketing digital</div>
         <div class="line"></div>
 
-        <!-- ✅ BOUTONS AU DESSUS DU TEXTE -->
+        <!-- Boutons au-dessus du texte -->
         <div class="ctaRow">
-          <button class="btn btnGhost" id="btnMore" type="button">Lire plus</button>
-
-          <!-- Mets ton PDF ici : assets/CV_Hajar_Mennani.pdf -->
-          <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noreferrer">Voir mon CV</a>
-
-          <!-- Remplace par ton vrai lien -->
-          <a class="btn btnGhost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-
-          <a class="btn btnGhost" href="#projets">Mes projets</a>
+          <button class="btn" id="btnMore" type="button">Lire plus</button>
+          <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noopener">Voir mon CV</a>
+          <a class="btn" href="https://www.linkedin.com/in/hajar-mennani-cdi-data-analyst-digital-paris/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="#projets">Mes projets</a>
         </div>
 
         <!-- Texte visible -->
@@ -331,13 +382,13 @@
         </div>
       </div>
 
-      <!-- RIGHT = PHOTO ONLY -->
+      <!-- RIGHT PHOTO -->
       <aside class="glass heroR">
-        <!-- IMPORTANT : mets ta photo dans images/photo.jpg (ou change le nom ici) -->
-    <img id="heroImg" class="heroPhoto" src="/Portfolio/9B43CEAB-EA88-4484-8810-F77EC03E0C2C.jpg" alt="Photo de Hajar">
-<div id="fallback" class="photoFallback" style="display:none;">Ajoute ta photo : /Portfolio/9B43CEAB-EA88-4484-8810-F77EC03E0C2C.jpg</div>
-
-
+        <!-- ✅ Chemin absolu fiable GitHub Pages (vu que ton image marche ici : /Portfolio/Image.jpeg) -->
+        <img class="heroPhoto" src="/Portfolio/Image.jpeg" alt="Photo de Hajar">
+        <div class="heroFrame"></div>
+      </aside>
+    </section>
 
     <!-- PROJETS -->
     <section id="projets" class="glass section">
@@ -348,17 +399,17 @@
         <div class="cardItem">
           <b>Dashboard Marketing — Power BI</b>
           <p>KPI, acquisition, conversions, filtres dynamiques.</p>
-          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+          <a href="#" target="_blank" rel="noopener">Voir →</a>
         </div>
         <div class="cardItem">
           <b>Rapport Performance — Looker Studio</b>
           <p>ROI, suivi campagnes, insights actionnables.</p>
-          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+          <a href="#" target="_blank" rel="noopener">Voir →</a>
         </div>
         <div class="cardItem">
           <b>Analyse SQL — KPI & Cohortes</b>
           <p>Extraction, segmentation, recommandations business.</p>
-          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+          <a href="#" target="_blank" rel="noopener">Voir →</a>
         </div>
       </div>
     </section>
@@ -370,16 +421,16 @@
 
       <div class="skills">
         <div class="skill">
-          <b>Data Analytics & Dashboards</b>
-          <p>Looker Studio, Power BI, Tableau, SQL, Google Analytics, Data cleaning & préparation, Gestion de bases de données, Power Query, Excel, CRM.</p>
+          <b>BI & Dashboards</b>
+          <p>Power BI, Looker Studio, KPI, dataviz, storytelling.</p>
         </div>
         <div class="skill">
-          <b>MEDIA DIGITAL & ACQUISITION</b>
-          <p>SEA, Facebook Ads, Référencement naturel (SEO), performance marketing.</p>
+          <b>Analyse</b>
+          <p>SQL, Excel, segmentation, cohortes, performance marketing.</p>
         </div>
         <div class="skill">
           <b>Web & Growth</b>
-          <p>Développement de sites WordPress (Divi, Elementor), Gestion de CMS et création de boutiques e-commerce, Intégration web et optimisation UX/UI</p>
+          <p>WordPress (Divi/Elementor), SEO/SEA, UX, optimisation.</p>
         </div>
       </div>
     </section>
@@ -387,13 +438,12 @@
     <!-- CONTACT -->
     <section id="contact" class="glass section">
       <h2>Contact</h2>
-      <p class="sub" style="margin-bottom:0;">
-        Email : <b>hajarmn18@gmail.com</b> • LinkedIn : 
-<a href="https://www.linkedin.com/in/hajar-mennani-cdi-data-analyst-digital-paris/" target="_blank" style="color:#A78BFA;font-weight:700;">
-  Hajar Mennani
-</a>
-
-
+      <p class="sub contactLine" style="margin-bottom:0;">
+        Email : <b>hajarmn18@gmail.com</b> • LinkedIn :
+        <a href="https://www.linkedin.com/in/hajar-mennani-cdi-data-analyst-digital-paris/" target="_blank" rel="noopener">
+          Hajar Mennani
+        </a>
+      </p>
     </section>
 
     <footer>© <script>document.write(new Date().getFullYear())</script> — Hajar Mennani</footer>
@@ -401,7 +451,7 @@
   </div>
 
   <script>
-    // Lire plus premium (smooth)
+    // Lire plus premium (smooth, sans bouger la photo car elle a une taille fixe)
     const more = document.getElementById("moreText");
     const btn  = document.getElementById("btnMore");
 
@@ -409,34 +459,29 @@
       more.classList.remove("open");
       more.style.maxHeight = "0px";
       btn.textContent = "Lire plus";
-      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-expanded","false");
     }
 
     function openMore(){
       more.classList.add("open");
       more.style.maxHeight = more.scrollHeight + "px";
       btn.textContent = "Lire moins";
-      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-expanded","true");
     }
 
+    // état initial
     closeMore();
+
     btn.addEventListener("click", () => {
       const opened = more.classList.contains("open");
       opened ? closeMore() : openMore();
     });
 
+    // si la fenêtre change de taille, on recalcule la hauteur du bloc "Lire plus"
     window.addEventListener("resize", () => {
       if(more.classList.contains("open")){
         more.style.maxHeight = more.scrollHeight + "px";
       }
-    });
-
-    // Photo fallback (si fichier photo manquant)
-    const img = document.getElementById("heroImg");
-    const fb  = document.getElementById("fallback");
-    img.addEventListener("error", () => {
-      img.style.display = "none";
-      fb.style.display = "flex";
     });
   </script>
 </body>
