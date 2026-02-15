@@ -1,7 +1,350 @@
-<!DOCTYPE html>
-<html>
-  <body style="background:#070712;color:white;font-family:Arial;padding:40px">
-    <h1>OK GitHub Pages fonctionne ✅</h1>
-    <p>Si tu vois ça, le problème vient du code précédent (copie/format/erreur).</p>
-  </body>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hajar Mennani — Portfolio Data Analyst</title>
+  <meta name="description" content="Portfolio Data : analyse, dashboards et visualisations (Power BI, SQL, Looker Studio, Tableau)." />
+
+  <style>
+    :root{
+      --bg0:#070712;
+      --bg1:#0B0A1A;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.10);
+      --text:#F4F5FF;
+      --muted:#B9B9CC;
+      --violet:#7C3AED;
+      --violet2:#A78BFA;
+      --radius: 18px;
+      --shadow: 0 18px 55px rgba(0,0,0,0.45);
+      --max: 1050px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 10%, rgba(124,58,237,.30), transparent 55%),
+        radial-gradient(800px 520px at 80% 18%, rgba(167,139,250,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+
+    a{ color: inherit; }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 70px; }
+
+    .glass{
+      background: rgba(0,0,0,0.30);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    /* NAV */
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding: 14px 16px;
+      position: sticky; top: 12px; z-index: 20;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; }
+    .logo{
+      width: 34px; height: 34px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--violet2), var(--violet));
+      box-shadow: 0 14px 40px rgba(124,58,237,.25);
+    }
+    .brand b{ display:block; font-size: 14px; letter-spacing:.2px; }
+    .brand small{ display:block; color: var(--muted); font-size: 12px; margin-top:2px; }
+
+    .links{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .links a{
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .links a:hover{ border-color: rgba(167,139,250,0.28); }
+
+    /* HERO */
+    .hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .heroL{ padding: 24px; }
+    .kicker{
+      color: var(--violet2);
+      font-weight: 850;
+      letter-spacing:.4px;
+      font-size: 12.5px;
+      text-transform: uppercase;
+    }
+    h1{
+      margin: 10px 0 8px;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.05;
+    }
+    .role{ margin: 0 0 14px; color: var(--muted); font-size: 14.5px; }
+    .line{
+      width: 140px; height: 5px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--violet2), var(--violet));
+      margin: 12px 0 16px;
+    }
+    .heroL p{
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+    .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+    .btn{
+      text-decoration:none;
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-weight: 850;
+      font-size: 13.5px;
+      border: 1px solid transparent;
+      display: inline-block;
+      transition: transform .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btnPrimary{
+      color:#0B0A1A;
+      background: linear-gradient(90deg, var(--violet2), var(--violet));
+      box-shadow: 0 16px 40px rgba(124,58,237,.20);
+    }
+    .btnGhost{
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .heroR{ padding: 18px; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+    .profileTop{ display:flex; align-items:center; gap:12px; }
+    .avatar{
+      width: 72px; height: 72px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+    }
+    .name{ margin:0; font-size: 16px; font-weight: 950; }
+    .mini{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
+
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* SECTIONS */
+    section{ margin-top: 18px; }
+    .section{ padding: 22px; }
+    .section h2{ margin:0 0 10px; font-size: 18px; letter-spacing:.2px; }
+    .sub{ margin:0 0 14px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+
+    /* Projects */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .cardItem{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .cardItem b{ display:block; margin-bottom: 6px; font-size: 14px; }
+    .cardItem p{ margin:0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .cardItem a{ text-decoration:none; font-weight: 850; color: var(--violet2); }
+
+    /* Skills */
+    .skills{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .skill{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .skill b{ display:block; margin-bottom: 6px; }
+    .skill p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      color: #9CA3AF;
+      font-size: 12.5px;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr; }
+      .skills{ grid-template-columns: 1fr; }
+      .links{ justify-content:flex-start; }
+      .nav{ position: static; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- NAV -->
+    <div class="glass nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <b>Hajar Mennani</b>
+          <small>Data Analyst / Chef de projet data</small>
+        </div>
+      </div>
+      <div class="links">
+        <a href="#parcours">Parcours</a>
+        <a href="#projets">Projets</a>
+        <a href="#competences">Compétences</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="glass heroL">
+        <div class="kicker">Analyse • Dataviz • Dashboards</div>
+        <h1>Bienvenue sur mon Portfolio</h1>
+        <div class="role">Je transforme les données en décisions actionnables.</div>
+        <div class="line"></div>
+
+        <p>
+          En tant qu’étudiant passionné par le monde de la data, j’ai créé ce portfolio pour rassembler et présenter
+          les différents projets que j’ai réalisés au cours de mon parcours académique et professionnel.
+        </p>
+
+        <div class="cta">
+          <!-- Remplace les liens -->
+          <a class="btn btnPrimary" href="assets/CV_Hajar_Mennani.pdf" target="_blank" rel="noreferrer">Voir mon CV</a>
+          <a class="btn btnGhost" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="btn btnGhost" href="#projets">Mes projets</a>
+        </div>
+      </div>
+
+      <aside class="glass heroR">
+        <div class="profileTop">
+          <!-- Si tu n'as pas de photo, laisse comme ça : ça n'affiche pas blanc -->
+          <img class="avatar" src="images/photo.jpg" alt="Photo de Hajar" onerror="this.style.display='none'">
+          <div>
+            <p class="name">Hajar Mennani</p>
+            <p class="mini">Data • BI • Visualisation</p>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span class="chip">SQL</span>
+          <span class="chip">Power BI</span>
+          <span class="chip">Looker Studio</span>
+          <span class="chip">Tableau</span>
+        </div>
+
+        <p class="mini" style="margin:0;">
+          Disponible pour collaboration / opportunités Data & BI.
+        </p>
+      </aside>
+    </section>
+
+    <!-- PARCOURS -->
+    <section id="parcours" class="glass section">
+      <h2>Mon parcours</h2>
+      <p class="sub">
+        En tant qu’étudiant passionné par le monde de la data, j’ai créé ce portfolio pour rassembler et présenter les
+        différents projets que j’ai réalisés au cours de mon parcours académique et professionnel. Ces projets illustrent
+        mon engagement, ma curiosité et ma volonté constante d’apprendre et d’explorer de nouveaux domaines.
+      </p>
+      <p class="sub">
+        Mon intérêt s’est progressivement orienté vers la data : de la collecte à la visualisation, en passant par l’analyse
+        et la valorisation des données pour aider à la prise de décision. Cette passion m’a conduit à développer des compétences
+        solides en gestion de projet data, en analyse de données, et en création de tableaux de bord interactifs.
+      </p>
+      <p class="sub" style="margin-bottom:0;">
+        Aujourd’hui, j’occupe le poste de chef de projet data, où je mets à profit mes compétences techniques et organisationnelles
+        pour piloter des projets data-driven et accompagner les entreprises dans leur transformation numérique.
+      </p>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets" class="glass section">
+      <h2>Projets (Data Viz & Dashboards)</h2>
+      <p class="sub">Ajoute ici tes liens publics Power BI / Looker / Tableau + captures si tu veux.</p>
+
+      <div class="cards">
+        <div class="cardItem">
+          <b>Dashboard Ventes — Power BI</b>
+          <p>KPI, CA, top produits, filtres dynamiques.</p>
+          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+        </div>
+        <div class="cardItem">
+          <b>Rapport Marketing — Looker Studio</b>
+          <p>ROI, conversion, suivi campagnes, insights.</p>
+          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+        </div>
+        <div class="cardItem">
+          <b>Analyse SQL — KPI & Cohortes</b>
+          <p>Requêtes SQL + visuels / captures.</p>
+          <a href="#" target="_blank" rel="noreferrer">Voir →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section id="competences" class="glass section">
+      <h2>Compétences</h2>
+      <p class="sub">Un stack simple, orienté BI & décision.</p>
+
+      <div class="skills">
+        <div class="skill">
+          <b>Power BI</b>
+          <p>Dashboards KPI, Power Query, DAX, data modeling.</p>
+        </div>
+        <div class="skill">
+          <b>SQL</b>
+          <p>Jointures, agrégations, KPI, cohortes, extraction multi-sources.</p>
+        </div>
+        <div class="skill">
+          <b>Data Viz</b>
+          <p>Storytelling, design lisible, insights actionnables.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="glass section">
+      <h2>Contact</h2>
+      <p class="sub" style="margin-bottom:0;">
+        Email : <b>tonemail@gmail.com</b> • LinkedIn : <b>(ton lien)</b>
+      </p>
+    </section>
+
+    <footer>© <script>document.write(new Date().getFullYear())</script> — Hajar Mennani</footer>
+
+  </div>
+</body>
 </html>
