@@ -10,16 +10,17 @@
     :root{
       --bg0:#070712;
       --bg1:#0B0A1A;
-      --border: rgba(255,255,255,0.10);
+
       --text:#F4F5FF;
       --muted:#B9B9CC;
 
       --violet:#7C3AED;
       --violet2:#A78BFA;
 
+      --border: rgba(255,255,255,0.10);
       --radius: 18px;
       --shadow: 0 18px 55px rgba(0,0,0,0.45);
-      --max: 1100px;
+      --max: 1120px;
     }
 
     *{ box-sizing:border-box; }
@@ -72,13 +73,13 @@
     }
     .links a:hover{ border-color: rgba(167,139,250,0.28); }
 
-    /* HERO LAYOUT */
+    /* HERO */
     .hero{
       margin-top: 18px;
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
-      align-items: start; /* important: la photo ne change pas quand le texte s'ouvre */
+      align-items: start; /* photo ne bouge pas quand le texte s’ouvre */
     }
 
     /* LEFT */
@@ -102,7 +103,7 @@
       margin: 12px 0 16px;
     }
 
-    /* Buttons row (au-dessus du texte) */
+    /* Buttons row */
     .ctaRow{
       display:flex;
       gap:10px;
@@ -116,6 +117,7 @@
       font-size: 13.5px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
+      color: var(--text);              /* ✅ texte blanc */
       cursor: pointer;
       transition: transform .12s ease, border-color .12s ease;
       user-select:none;
@@ -128,11 +130,19 @@
       border-color: rgba(167,139,250,0.30);
     }
     .btnPrimary{
-      color:#0B0A1A;
+      color:#0B0A1A;                   /* texte sombre sur dégradé */
       border-color: transparent;
       background: linear-gradient(90deg, var(--violet2), var(--violet));
       box-shadow: 0 16px 40px rgba(124,58,237,.20);
     }
+
+    /* ✅ forcer le bouton (et tout bouton) à ne pas avoir de style navigateur */
+    button.btn{
+      -webkit-appearance: none;
+      appearance: none;
+      font: inherit;
+    }
+
     #btnMore{ position: relative; }
     #btnMore::after{
       content:"";
@@ -169,37 +179,41 @@
       margin-top: 10px;
     }
 
-    /* RIGHT PHOTO — taille fixe + glow premium */
+    /* RIGHT PHOTO — Premium + un peu plus grande + taille fixe */
     .heroR{
       padding: 0;
       overflow: hidden;
       position: relative;
       width: 100%;
-      max-width: 380px;     /* réduit un peu la largeur */
-      height: 480px;        /* fixe la hauteur => ne bouge pas avec Lire plus */
-      justify-self: end;    /* pousse à droite */
-      align-self: start;    /* garde la même taille */
+      max-width: 430px;     /* ✅ plus grande qu'avant */
+      height: 520px;        /* ✅ fixe, ne change pas avec Lire plus */
+      justify-self: end;
+      align-self: start;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
-    /* Glow derrière */
+    /* Glow violet premium derrière */
     .heroR::before{
       content:"";
       position:absolute;
-      inset:-38px;
+      inset:-44px;
       background:
-        radial-gradient(380px 260px at 30% 20%, rgba(167,139,250,0.55), transparent 60%),
-        radial-gradient(420px 280px at 70% 70%, rgba(124,58,237,0.45), transparent 62%);
+        radial-gradient(420px 300px at 30% 20%, rgba(167,139,250,0.58), transparent 60%),
+        radial-gradient(460px 320px at 70% 75%, rgba(124,58,237,0.48), transparent 62%);
       filter: blur(18px);
       opacity: .95;
       z-index:0;
     }
 
-    /* Overlay glass sur la photo */
+    /* Glass overlay (effet haut de gamme) */
     .heroR::after{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.55));
+      background:
+        radial-gradient(900px 500px at 30% 10%, rgba(255,255,255,0.08), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.58));
       z-index:2;
       pointer-events:none;
     }
@@ -214,7 +228,7 @@
       z-index: 1;
       transform: scale(1.02);
       transition: transform .35s ease, filter .35s ease;
-      filter: saturate(1.05) contrast(1.05);
+      filter: saturate(1.06) contrast(1.06);
     }
 
     /* Cadre fin + ombre soft designer */
@@ -224,15 +238,16 @@
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow:
-        0 20px 70px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(124,58,237,0.10) inset;
+        0 26px 90px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(124,58,237,0.14) inset;
       z-index:3;
       pointer-events:none;
     }
 
+    /* Hover premium */
     .heroR:hover .heroPhoto{
       transform: scale(1.06);
-      filter: saturate(1.12) contrast(1.08);
+      filter: saturate(1.14) contrast(1.10);
     }
 
     /* SECTIONS */
@@ -299,7 +314,7 @@
       .nav{ position: static; }
       .heroR{
         max-width: 100%;
-        height: 340px; /* fixe sur mobile */
+        height: 360px; /* fixe sur mobile */
         justify-self: stretch;
       }
     }
@@ -382,9 +397,9 @@
         </div>
       </div>
 
-      <!-- RIGHT PHOTO -->
+      <!-- RIGHT PHOTO (Premium) -->
       <aside class="glass heroR">
-        <!-- ✅ Chemin absolu fiable GitHub Pages (vu que ton image marche ici : /Portfolio/Image.jpeg) -->
+        <!-- ✅ Chemin absolu fiable GitHub Pages -->
         <img class="heroPhoto" src="/Portfolio/Image.jpeg" alt="Photo de Hajar">
         <div class="heroFrame"></div>
       </aside>
@@ -451,7 +466,7 @@
   </div>
 
   <script>
-    // Lire plus premium (smooth, sans bouger la photo car elle a une taille fixe)
+    // Lire plus premium (smooth, la photo reste fixe)
     const more = document.getElementById("moreText");
     const btn  = document.getElementById("btnMore");
 
@@ -469,15 +484,12 @@
       btn.setAttribute("aria-expanded","true");
     }
 
-    // état initial
     closeMore();
-
     btn.addEventListener("click", () => {
       const opened = more.classList.contains("open");
       opened ? closeMore() : openMore();
     });
 
-    // si la fenêtre change de taille, on recalcule la hauteur du bloc "Lire plus"
     window.addEventListener("resize", () => {
       if(more.classList.contains("open")){
         more.style.maxHeight = more.scrollHeight + "px";
