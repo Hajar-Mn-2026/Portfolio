@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Études de cas — Hajar Mennani</title>
+
+  <style>
+    :root{
+      --bg0:#070712;
+      --bg1:#0B0A1A;
+      --text:#F4F5FF;
+      --muted:#B9B9CC;
+      --violet:#7C3AED;
+      --violet2:#A78BFA;
+      --border: rgba(255,255,255,0.10);
+      --radius: 18px;
+      --shadow: 0 18px 55px rgba(0,0,0,0.45);
+      --max: 1140px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 16% 8%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(900px 520px at 82% 16%, rgba(167,139,250,.22), transparent 55%),
+        radial-gradient(900px 520px at 60% 90%, rgba(124,58,237,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px;}
+    .glass{
+      background: rgba(0,0,0,0.30);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Top bar */
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;
+      position: sticky; top: 12px; z-index: 10;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:34px;height:34px;border-radius:12px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 14px 40px rgba(124,58,237,.18);
+      flex:0 0 auto;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .brand b{display:block;font-size:14px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+    .btn{
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:13.5px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.05);
+      color:var(--text);
+      display:inline-flex;align-items:center;gap:8px;
+      transition:transform .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(167,139,250,0.30);}
+
+    /* Header */
+    .hero{
+      margin-top:18px;
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;inset:-1px;border-radius:var(--radius);
+      background:
+        radial-gradient(700px 320px at 20% 0%, rgba(167,139,250,0.10), transparent 60%),
+        radial-gradient(700px 320px at 80% 120%, rgba(124,58,237,0.10), transparent 60%);
+      pointer-events:none;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3.6vw, 42px);
+      line-height:1.08;
+      position:relative;
+    }
+    .quote{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:15px;
+      position:relative;
+      max-width: 78ch;
+    }
+    .line{
+      width:150px;height:5px;border-radius:999px;
+      background:linear-gradient(90deg,var(--violet2),var(--violet));
+      margin:16px 0 0;
+      position:relative;
+    }
+
+    /* Gallery */
+    .section{margin-top:18px;padding:22px;}
+    .section h2{margin:0 0 10px;font-size:18px}
+    .section p{margin:0 0 14px;color:var(--muted);line-height:1.75;font-size:14.5px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top:12px;
+    }
+    .shot{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.04);
+      overflow:hidden;
+      position:relative;
+    }
+    .shot img{
+      width:100%;
+      height:210px;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.05) contrast(1.05);
+      transition: transform .35s ease;
+    }
+    .shot:hover img{transform:scale(1.04);}
+    .cap{
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .tag{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(0,0,0,0.28);
+      color:var(--text);
+      font-weight:800;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr;}
+      .shot img{height:220px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top bar -->
+    <div class="glass top">
+      <div class="brand">
+        <div class="logo">
+          <!-- Optionnel: mets une petite image ici si tu en as une -->
+          <img src="/Portfolio/profile-pic (4).png" alt="Logo" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <b>Hajar Mennani</b>
+          <small>Études de cas • Data & Marketing</small>
+        </div>
+      </div>
+
+      <a class="btn" href="/Portfolio/index.html">← Retour au portfolio</a>
+    </div>
+
+    <!-- Header -->
+    <section class="glass hero">
+      <h1>Études de cas et réalisations</h1>
+      <p class="quote">« Des données à la décision : exemples de projets où j’ai aidé des entreprises à optimiser leurs performances grâce à l’analyse de données. »</p>
+      <div class="line"></div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="glass section">
+      <h2>Rapports & dashboards</h2>
+      <p>Ajoute ici tes captures d’écran (Power BI / Looker Studio / Tableau). Tu pourras aussi mettre un bouton “Voir le rapport” si tu as un lien public.</p>
+
+      <div class="grid">
+        <!-- ✅ EXEMPLE 1 -->
+        <div class="shot">
+          <img src="/Portfolio/images/ton-rapport-1.png" alt="Dashboard 1"
+               onerror="this.closest('.shot').style.display='none'">
+          <div class="cap">
+            <div class="tag">Looker Studio</div><br>
+            Performance marketing — suivi KPI, ROI, conversions.
+          </div>
+        </div>
+
+        <!-- ✅ EXEMPLE 2 -->
+        <div class="shot">
+          <img src="/Portfolio/images/ton-rapport-2.png" alt="Dashboard 2"
+               onerror="this.closest('.shot').style.display='none'">
+          <div class="cap">
+            <div class="tag">Power BI</div><br>
+            Acquisition & cohorte — segmentation et insights actionnables.
+          </div>
+        </div>
+
+        <!-- ✅ EXEMPLE 3 -->
+        <div class="shot">
+          <img src="/Portfolio/images/ton-rapport-3.png" alt="Dashboard 3"
+               onerror="this.closest('.shot').style.display='none'">
+          <div class="cap">
+            <div class="tag">Tableau</div><br>
+            Analyse des tendances — visualisations et storytelling.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
