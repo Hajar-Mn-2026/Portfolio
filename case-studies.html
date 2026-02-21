@@ -4,33 +4,68 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Études de cas — Hajar Mennani</title>
+  <meta name="description" content="Études de cas et réalisations : projets data (dashboards, dataviz, KPI, reporting) de Hajar Mennani." />
 
   <style>
     :root{
       --bg0:#070712;
       --bg1:#0B0A1A;
+
       --text:#F4F5FF;
       --muted:#B9B9CC;
+
       --violet:#7C3AED;
       --violet2:#A78BFA;
+
       --border: rgba(255,255,255,0.10);
       --radius: 18px;
       --shadow: 0 18px 55px rgba(0,0,0,0.45);
+
       --max: 1140px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
+      color: var(--text);
       background:
         radial-gradient(900px 520px at 16% 8%, rgba(124,58,237,.35), transparent 55%),
         radial-gradient(900px 520px at 82% 16%, rgba(167,139,250,.22), transparent 55%),
         radial-gradient(900px 520px at 60% 90%, rgba(124,58,237,.18), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px;}
+
+    a{ color: inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 70px; }
+
+    /* animated background blobs (subtle premium) */
+    .blob{
+      position: fixed;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      filter: blur(55px);
+      opacity: .18;
+      pointer-events:none;
+      z-index: -1;
+      animation: floaty 10s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 30%, var(--violet2), transparent 55%);
+    }
+    .blob.b2{
+      width: 620px; height: 620px;
+      right: -260px; top: 90px;
+      opacity: .14;
+      animation-duration: 12s;
+      background: radial-gradient(circle at 30% 30%, var(--violet), transparent 58%);
+    }
+    .blob.b1{ left: -240px; top: -120px; }
+    @keyframes floaty{
+      0%,100%{ transform: translate(0,0) scale(1); }
+      50%{ transform: translate(18px,22px) scale(1.04); }
+    }
+
     .glass{
       background: rgba(0,0,0,0.30);
       border: 1px solid var(--border);
@@ -41,11 +76,27 @@
 
     /* Top bar */
     .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:14px 16px;
-      position: sticky; top: 12px; z-index: 10;
+      position: sticky; top: 12px; z-index: 20;
     }
-    .brand{display:flex;align-items:center;gap:10px}
+    .top::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: calc(var(--radius) + 1px);
+      padding:1px;
+      background: linear-gradient(90deg, rgba(167,139,250,.35), rgba(124,58,237,.25), rgba(167,139,250,.12));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events:none;
+      opacity:.85;
+    }
+
+    .brand{display:flex;align-items:center;gap:10px;position:relative;z-index:1;}
     .logo{
       width:34px;height:34px;border-radius:12px;overflow:hidden;
       border:1px solid rgba(255,255,255,0.14);
@@ -53,9 +104,9 @@
       box-shadow: 0 14px 40px rgba(124,58,237,.18);
       flex:0 0 auto;
     }
-    .logo img{width:100%;height:100%;object-fit:cover;display:block}
-    .brand b{display:block;font-size:14px}
-    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .logo img{width:100%;height:100%;object-fit:cover;display:block;}
+    .brand b{display:block;font-size:14px;}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px;}
 
     .btn{
       padding:10px 12px;
@@ -67,10 +118,11 @@
       color:var(--text);
       display:inline-flex;align-items:center;gap:8px;
       transition:transform .12s ease, border-color .12s ease;
+      position:relative; z-index:1;
     }
     .btn:hover{transform:translateY(-1px);border-color:rgba(167,139,250,0.30);}
 
-    /* Header */
+    /* Header hero */
     .hero{
       margin-top:18px;
       padding:26px;
@@ -79,94 +131,151 @@
     }
     .hero::before{
       content:"";
-      position:absolute;inset:-1px;border-radius:var(--radius);
+      position:absolute;
+      inset:-1px;
+      border-radius: var(--radius);
       background:
         radial-gradient(700px 320px at 20% 0%, rgba(167,139,250,0.10), transparent 60%),
         radial-gradient(700px 320px at 80% 120%, rgba(124,58,237,0.10), transparent 60%);
       pointer-events:none;
     }
+
     h1{
       margin:0 0 10px;
-      font-size: clamp(26px, 3.6vw, 42px);
+      font-size: clamp(26px, 3.6vw, 44px);
       line-height:1.08;
       position:relative;
+      z-index:1;
     }
     .quote{
       margin:0;
       color:var(--muted);
-      line-height:1.8;
+      line-height:1.85;
       font-size:15px;
       position:relative;
-      max-width: 78ch;
+      z-index:1;
+      max-width: 85ch;
     }
     .line{
       width:150px;height:5px;border-radius:999px;
       background:linear-gradient(90deg,var(--violet2),var(--violet));
       margin:16px 0 0;
       position:relative;
+      z-index:1;
     }
 
-    /* Gallery */
-    .section{margin-top:18px;padding:22px;}
-    .section h2{margin:0 0 10px;font-size:18px}
-    .section p{margin:0 0 14px;color:var(--muted);line-height:1.75;font-size:14.5px}
+    /* Section wrapper */
+    .section{ margin-top:18px; padding:22px; }
+    .section h2{ margin:0 0 10px; font-size:18px; letter-spacing:.2px; }
+    .section p{ margin:0 0 14px; color:var(--muted); line-height:1.75; font-size:14.5px; }
 
-    .grid{
+    /* ✅ Projects layout (like your screenshot) */
+    .projectsGrid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top:12px;
+      grid-template-columns: 1fr 1fr;
+      gap:28px;
+      margin-top:18px;
     }
-    .shot{
-      border-radius:16px;
+
+    .projectCard{
+      background:rgba(255,255,255,0.03);
       border:1px solid rgba(255,255,255,0.10);
-      background:rgba(255,255,255,0.04);
-      overflow:hidden;
+      border-radius:18px;
+      padding:18px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
       position:relative;
+      overflow:hidden;
     }
-    .shot img{
+    .projectCard::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:18px;
+      background:
+        radial-gradient(520px 260px at 20% 0%, rgba(167,139,250,0.10), transparent 55%),
+        radial-gradient(520px 260px at 80% 120%, rgba(124,58,237,0.10), transparent 55%);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .projectCard:hover{
+      transform: translateY(-4px);
+      border-color: rgba(167,139,250,0.22);
+      box-shadow: 0 20px 60px rgba(124,58,237,.18);
+    }
+
+    .projectImg{
       width:100%;
-      height:210px;
-      object-fit:cover;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
       display:block;
-      filter:saturate(1.05) contrast(1.05);
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
       transition: transform .35s ease;
     }
-    .shot:hover img{transform:scale(1.04);}
-    .cap{
-      padding:12px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-    }
-    .tag{
-      display:inline-flex;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:rgba(0,0,0,0.28);
-      color:var(--text);
-      font-weight:800;
-      font-size:12px;
-      margin-bottom:10px;
+    .projectCard:hover .projectImg{ transform: scale(1.01); }
+
+    .projectCard h3{
+      margin: 6px 0 10px;
+      font-size: 20px;
+      position:relative;
+      z-index:1;
     }
 
+    .projectMeta{
+      position:relative;
+      z-index:1;
+      margin: 0 0 10px;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+    .projectMeta b{ color: var(--text); }
+
+    .reportBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:10px;
+      padding:10px 16px;
+      border-radius:14px;
+      background: linear-gradient(90deg, rgba(167,139,250,0.95), rgba(124,58,237,0.95));
+      color:white;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+      position:relative;
+      z-index:1;
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .reportBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+
+    /* Responsive */
     @media (max-width:980px){
-      .grid{grid-template-columns:1fr;}
-      .shot img{height:220px;}
+      .projectsGrid{ grid-template-columns: 1fr; }
+      .top{ position: static; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
 
 <body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
   <div class="wrap">
 
-    <!-- Top bar -->
+    <!-- TOP BAR -->
     <div class="glass top">
       <div class="brand">
+        <!-- Optionnel : si tu as un petit logo, mets-le dans /Portfolio/images/logo.png -->
         <div class="logo">
-          <!-- Optionnel: mets une petite image ici si tu en as une -->
-          <img src="/Portfolio/profile-pic (4).png" alt="Logo" onerror="this.style.display='none'">
+          <img src="/Portfolio/images/logo.png" alt="Logo Hajar" onerror="this.style.display='none'">
         </div>
         <div>
           <b>Hajar Mennani</b>
@@ -177,48 +286,58 @@
       <a class="btn" href="/Portfolio/index.html">← Retour au portfolio</a>
     </div>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <section class="glass hero">
       <h1>Études de cas et réalisations</h1>
       <p class="quote">« Transformer la donnée en décisions stratégiques : découvrez mes projets professionnels et académiques dédiés à l’optimisation de la performance par la data.»</p>
       <div class="line"></div>
     </section>
 
-    <!-- Gallery -->
+    <!-- CONTENT -->
     <section class="glass section">
       <h2>Rapports & dashboards</h2>
-      <p>Ajoute ici tes captures d’écran (Power BI / Looker Studio / Tableau). Tu pourras aussi mettre un bouton “Voir le rapport” si tu as un lien public.</p>
+      <p>Ajoute tes captures d’écran et un lien direct vers le rapport (Looker Studio, Power BI, Tableau…).</p>
 
-      <div class="grid">
-        <!-- ✅ EXEMPLE 1 -->
-        <div class="shot">
-          <img src="/Portfolio/images/ton-rapport-1.png" alt="Dashboard 1"
-               onerror="this.closest('.shot').style.display='none'">
-          <div class="cap">
-            <div class="tag">Looker Studio</div><br>
-            Performance marketing — suivi KPI, ROI, conversions.
-          </div>
-        </div>
+      <div class="projectsGrid">
 
-        <!-- ✅ EXEMPLE 2 -->
-        <div class="shot">
-          <img src="/Portfolio/images/ton-rapport-2.png" alt="Dashboard 2"
-               onerror="this.closest('.shot').style.display='none'">
-          <div class="cap">
-            <div class="tag">Power BI</div><br>
-            Acquisition & cohorte — segmentation et insights actionnables.
-          </div>
-        </div>
+        <!-- PROJET 1 -->
+        <article class="projectCard">
+          <!-- Remplace l'image par ta capture dans /images/ -->
+          <img class="projectImg" src="/Portfolio/images/dashboard-deepseek.png" alt="Dashboard DeepSeek vs ChatGPT"
+               onerror="this.style.display='none'">
 
-        <!-- ✅ EXEMPLE 3 -->
-        <div class="shot">
-          <img src="/Portfolio/images/ton-rapport-3.png" alt="Dashboard 3"
-               onerror="this.closest('.shot').style.display='none'">
-          <div class="cap">
-            <div class="tag">Tableau</div><br>
-            Analyse des tendances — visualisations et storytelling.
-          </div>
-        </div>
+          <h3>Dashboard DeepSeek vs ChatGPT</h3>
+
+          <ul class="projectMeta">
+            <li>Dataset public : <b>Kaggle</b></li>
+            <li>Objectif : Comparer les performances de DeepSeek et ChatGPT</li>
+            <li>Outils : Power BI, Power Query, DAX, M, SQL</li>
+          </ul>
+
+          <!-- Mets ton lien Looker Studio / Power BI (public) ici -->
+          <a class="reportBtn" href="https://TON-LIEN-RAPPORT-ICI" target="_blank" rel="noopener">
+            Voir le rapport →
+          </a>
+        </article>
+
+        <!-- PROJET 2 -->
+        <article class="projectCard">
+          <img class="projectImg" src="/Portfolio/images/dashboard-airbnb.png" alt="Dashboard Airbnb New York"
+               onerror="this.style.display='none'">
+
+          <h3>Dashboard Airbnb New York</h3>
+
+          <ul class="projectMeta">
+            <li>Dataset public : <b>CSV.DataSuits</b></li>
+            <li>Objectif : Analyse de la qualité des logements</li>
+            <li>Outils : Power BI, Power Query, DAX, M, SQL</li>
+          </ul>
+
+          <a class="reportBtn" href="https://TON-LIEN-RAPPORT-ICI" target="_blank" rel="noopener">
+            Voir le rapport →
+          </a>
+        </article>
+
       </div>
     </section>
 
